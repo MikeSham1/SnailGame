@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bd2387e9-2626-4b25-b6b1-0bb6ab6551a0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/Snailman Run.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bplayer_stand.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bplayer_walk_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bplayer_walk_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fly1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fly2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NightSky.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pixeltype.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Rplayer_stand.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Rplayer_walk_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Rplayer_walk_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Snail1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Snail2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SnailGame.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SnailGame.py.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UserStand.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UserWalk1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UserWalk2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ground(1).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jump.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.py.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.spec" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pixil-frame-0 (7).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pixil-frame-0 (8).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pixil-frame-0 (9).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/player_stand.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project4.spec" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExportToHTMLSettings">
+    <option name="printScope" value="1" />
+    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/main.py" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2Q1uu27i18aiimu5bJV854CCvwj" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/micha/PycharmProjects/pythonProject4",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\micha\PycharmProjects\pythonProject4" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\micha\PycharmProjects\pythonProject4\.idea\inspectionProfiles" />
+      <recent name="C:\Users\micha\PycharmProjects\pythonProject4" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="Snailman Run" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bd2387e9-2626-4b25-b6b1-0bb6ab6551a0" name="Changes" comment="" />
+      <created>1684533627364</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1684533627364</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>

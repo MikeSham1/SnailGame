@@ -1,0 +1,234 @@
+<html>
+<head>
+<title>SnailGame.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6897bb;}
+.s3 { color: #6a8759;}
+.s4 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+SnailGame.py</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">pygame</span>
+<span class="s0">from </span><span class="s1">sys </span><span class="s0">import </span><span class="s1">exit</span>
+<span class="s0">from </span><span class="s1">random </span><span class="s0">import </span><span class="s1">randint</span>
+
+
+<span class="s0">def </span><span class="s1">display_score():</span>
+    <span class="s1">current_time = int(pygame.time.get_ticks() / </span><span class="s2">1000</span><span class="s1">) - start_time</span>
+    <span class="s1">score_surface = test_font.render(</span><span class="s3">f'Score Time: </span><span class="s0">{</span><span class="s1">current_time</span><span class="s0">}</span><span class="s3">'</span><span class="s0">, False, </span><span class="s1">(</span><span class="s2">255</span><span class="s0">, </span><span class="s2">255</span><span class="s0">, </span><span class="s2">255</span><span class="s1">))</span>
+    <span class="s1">score_rect = score_surface.get_rect(center=(</span><span class="s2">450</span><span class="s0">, </span><span class="s2">100</span><span class="s1">))</span>
+    <span class="s1">screen.blit(score_surface</span><span class="s0">, </span><span class="s1">score_rect)</span>
+    <span class="s0">return </span><span class="s1">current_time</span>
+
+<span class="s0">def </span><span class="s1">obstacle_movement(obstacle_list):</span>
+    <span class="s0">if </span><span class="s1">obstacle_list:</span>
+        <span class="s0">for </span><span class="s1">obstacle_rect </span><span class="s0">in </span><span class="s1">obstacle_list:</span>
+            <span class="s1">obstacle_rect.x -= </span><span class="s2">5</span>
+
+            <span class="s0">if </span><span class="s1">obstacle_rect.bottom == </span><span class="s2">479</span><span class="s1">:</span>
+                <span class="s1">screen.blit(snail_surface</span><span class="s0">, </span><span class="s1">obstacle_rect)</span>
+            <span class="s0">else</span><span class="s1">:</span>
+                <span class="s1">screen.blit(fly_surf</span><span class="s0">, </span><span class="s1">obstacle_rect)</span>
+
+        <span class="s1">obstacle_list = [obstacle </span><span class="s0">for </span><span class="s1">obstacle </span><span class="s0">in </span><span class="s1">obstacle_list </span><span class="s0">if </span><span class="s1">obstacle.x &gt; -</span><span class="s2">100</span><span class="s1">]</span>
+
+        <span class="s0">return </span><span class="s1">obstacle_list</span>
+    <span class="s0">else</span><span class="s1">:</span>
+        <span class="s0">return </span><span class="s1">[]</span>
+
+
+<span class="s0">def </span><span class="s1">collisions(player</span><span class="s0">, </span><span class="s1">obstacles):</span>
+    <span class="s0">if </span><span class="s1">obstacles:</span>
+        <span class="s0">for </span><span class="s1">obstacle_rect </span><span class="s0">in </span><span class="s1">obstacles:</span>
+            <span class="s0">if </span><span class="s1">player.colliderect(obstacle_rect): </span><span class="s0">return False</span>
+    <span class="s0">return True</span>
+
+
+<span class="s0">def </span><span class="s1">player_animation():</span>
+    <span class="s0">global </span><span class="s1">player_surf</span><span class="s0">, </span><span class="s1">player_index</span>
+
+    <span class="s0">if </span><span class="s1">player_rect.bottom &lt; </span><span class="s2">475</span><span class="s1">:</span>
+        <span class="s1">player_surf = player_jump_scaled</span>
+    <span class="s0">else</span><span class="s1">:</span>
+        <span class="s1">player_index += </span><span class="s2">0.1</span>
+        <span class="s0">if </span><span class="s1">player_index &gt;= len(player_walk): player_index = </span><span class="s2">0</span>
+        <span class="s1">player_surf = player_walk[int(player_index)]</span>
+    <span class="s4"># play walking animation if player is on the floor</span>
+    <span class="s4"># display the jump surface when player is not on the floor</span>
+
+
+<span class="s4"># initializing pygame</span>
+<span class="s1">pygame.init()</span>
+
+<span class="s4"># screen display settings/configuration</span>
+<span class="s1">screen = pygame.display.set_mode((</span><span class="s2">900</span><span class="s0">, </span><span class="s2">600</span><span class="s1">))</span>
+<span class="s1">pygame.display.set_caption(</span><span class="s3">&quot;Snail Runner&quot;</span><span class="s1">)</span>
+<span class="s1">clock = pygame.time.Clock()  </span><span class="s4"># framerate initializer</span>
+<span class="s1">test_font = pygame.font.Font(</span><span class="s3">'../../OneDrive/Desktop/Pixeltype.ttf'</span><span class="s0">, </span><span class="s2">100</span><span class="s1">)</span>
+<span class="s1">game_active = </span><span class="s0">False</span>
+<span class="s1">start_time = </span><span class="s2">0</span>
+<span class="s1">score = </span><span class="s2">0</span>
+
+<span class="s4"># static images/sprites</span>
+
+<span class="s1">sky_surface = pygame.image.load(</span><span class="s3">'NightSky.png'</span><span class="s1">)</span>
+<span class="s1">ground_surface = pygame.image.load(</span><span class="s3">'ground(1).png'</span><span class="s1">)</span>
+<span class="s1">sky_scaled = pygame.transform.scale(sky_surface</span><span class="s0">, </span><span class="s1">(</span><span class="s2">1200</span><span class="s0">, </span><span class="s2">550</span><span class="s1">))  </span><span class="s4"># Scaling the Sky image</span>
+<span class="s1">ground_surface_scaled = pygame.transform.scale(ground_surface</span><span class="s0">, </span><span class="s1">(</span><span class="s2">1000</span><span class="s0">, </span><span class="s2">176</span><span class="s1">))</span>
+<span class="s4"># score_surface = test_font.render('Hello World', False, 'White')</span>
+<span class="s4"># score_rect = score_surface.get_rect(center = (450,100))</span>
+<span class="s3">&quot;&quot;&quot; 
+--------------------------------------------------------------------------------------------------- 
+                                  Special Sprites Configuration 
+--------------------------------------------------------------------------------------------------- 
+&quot;&quot;&quot;</span>
+<span class="s4"># Obstacles</span>
+<span class="s4"># Snail</span>
+<span class="s1">snail_frame_1 = pygame.image.load(</span><span class="s3">'Snail1.png'</span><span class="s1">)</span>
+<span class="s1">snail_frame_2 = pygame.image.load(</span><span class="s3">'Snail2.png'</span><span class="s1">)</span>
+<span class="s1">snail_frame1_scaled = pygame.transform.scale(snail_frame_1</span><span class="s0">, </span><span class="s1">(</span><span class="s2">60</span><span class="s0">, </span><span class="s2">70</span><span class="s1">))</span>
+<span class="s1">snail_frame2_scaled = pygame.transform.scale(snail_frame_2</span><span class="s0">, </span><span class="s1">(</span><span class="s2">60</span><span class="s0">, </span><span class="s2">70</span><span class="s1">))</span>
+<span class="s1">snail_frames = [snail_frame1_scaled</span><span class="s0">, </span><span class="s1">snail_frame2_scaled]</span>
+<span class="s1">snail_frame_index = </span><span class="s2">0</span>
+<span class="s1">snail_surface = snail_frames[snail_frame_index]</span>
+
+<span class="s4"># Fly</span>
+<span class="s1">fly_frame_1 = pygame.image.load(</span><span class="s3">'Fly1.png'</span><span class="s1">)</span>
+<span class="s1">fly_frame_2 = pygame.image.load(</span><span class="s3">'Fly2.png'</span><span class="s1">)</span>
+<span class="s1">fly_frame1_scaled = pygame.transform.scale(fly_frame_1</span><span class="s0">, </span><span class="s1">(</span><span class="s2">60</span><span class="s0">, </span><span class="s2">70</span><span class="s1">))</span>
+<span class="s1">fly_frame2_scaled = pygame.transform.scale(fly_frame_2</span><span class="s0">, </span><span class="s1">(</span><span class="s2">60</span><span class="s0">, </span><span class="s2">70</span><span class="s1">))</span>
+<span class="s1">fly_frames = [fly_frame1_scaled</span><span class="s0">, </span><span class="s1">fly_frame2_scaled]</span>
+<span class="s1">fly_frame_index = </span><span class="s2">0</span>
+<span class="s1">fly_surf = fly_frames[fly_frame_index]</span>
+
+<span class="s1">obstacle_rect_list = []</span>
+
+<span class="s4"># Green player</span>
+<span class="s1">player_walk_1 = pygame.image.load(</span><span class="s3">'UserWalk1.png'</span><span class="s1">)</span>
+<span class="s1">player_walk1_scaled = pygame.transform.scale(player_walk_1</span><span class="s0">, </span><span class="s1">(</span><span class="s2">80</span><span class="s0">, </span><span class="s2">90</span><span class="s1">))</span>
+<span class="s1">player_walk_2 = pygame.image.load(</span><span class="s3">'UserWalk2.png'</span><span class="s1">)</span>
+<span class="s1">player_walk2_scaled = pygame.transform.scale(player_walk_2</span><span class="s0">, </span><span class="s1">(</span><span class="s2">80</span><span class="s0">, </span><span class="s2">90</span><span class="s1">))</span>
+<span class="s1">player_walk = [player_walk1_scaled</span><span class="s0">, </span><span class="s1">player_walk2_scaled]</span>
+<span class="s1">player_jump = pygame.image.load(</span><span class="s3">'jump.png'</span><span class="s1">)</span>
+<span class="s1">player_jump_scaled = pygame.transform.scale(player_jump</span><span class="s0">, </span><span class="s1">(</span><span class="s2">80</span><span class="s0">, </span><span class="s2">90</span><span class="s1">))</span>
+<span class="s1">player_index = </span><span class="s2">0</span>
+
+<span class="s1">player_surf = player_walk[player_index]</span>
+<span class="s1">player_rect = player_surf.get_rect(midbottom=(</span><span class="s2">120</span><span class="s0">, </span><span class="s2">385</span><span class="s1">))</span>
+<span class="s1">player_gravity = </span><span class="s2">0</span>
+
+<span class="s4"># Intro Screen</span>
+<span class="s1">player_stand = pygame.image.load(</span><span class="s3">'UserStand.png'</span><span class="s1">)</span>
+<span class="s1">player_stand_scaled = pygame.transform.scale(player_stand</span><span class="s0">, </span><span class="s1">(</span><span class="s2">160</span><span class="s0">, </span><span class="s2">175</span><span class="s1">))</span>
+<span class="s1">player_stand_rect = player_stand_scaled.get_rect(center=(</span><span class="s2">450</span><span class="s0">, </span><span class="s2">270</span><span class="s1">))</span>
+
+<span class="s1">game_name = test_font.render(</span><span class="s3">'Snailman Run'</span><span class="s0">, False, </span><span class="s1">(</span><span class="s2">255</span><span class="s0">, </span><span class="s2">255</span><span class="s0">, </span><span class="s2">255</span><span class="s1">))</span>
+<span class="s1">game_name_rect = game_name.get_rect(center=(</span><span class="s2">450</span><span class="s0">, </span><span class="s2">100</span><span class="s1">))</span>
+
+<span class="s1">game_message = test_font.render(</span><span class="s3">'Press SPACE to continue'</span><span class="s0">, False, </span><span class="s1">(</span><span class="s2">255</span><span class="s0">, </span><span class="s2">255</span><span class="s0">, </span><span class="s2">255</span><span class="s1">))</span>
+<span class="s1">game_message_rect = game_message.get_rect(center=(</span><span class="s2">450</span><span class="s0">, </span><span class="s2">450</span><span class="s1">))</span>
+<span class="s1">game_creators = test_font.render(</span><span class="s3">'Code: Michael S. Art: Ethan A.'</span><span class="s0">, False, </span><span class="s1">(</span><span class="s2">255</span><span class="s0">, </span><span class="s2">255</span><span class="s0">, </span><span class="s2">255</span><span class="s1">))</span>
+<span class="s1">game_creators_rect = game_creators.get_rect(center=(</span><span class="s2">450</span><span class="s0">, </span><span class="s2">530</span><span class="s1">))</span>
+<span class="s4"># Timer1</span>
+<span class="s4"># pygame</span>
+<span class="s1">obstacle_timer = pygame.USEREVENT + </span><span class="s2">1</span>
+<span class="s1">pygame.time.set_timer(obstacle_timer</span><span class="s0">, </span><span class="s2">1500</span><span class="s1">)</span>
+
+<span class="s1">snail_animation_timer = pygame.USEREVENT + </span><span class="s2">2</span>
+<span class="s1">pygame.time.set_timer(snail_animation_timer</span><span class="s0">, </span><span class="s2">500</span><span class="s1">)</span>
+
+<span class="s1">fly_animation_timer = pygame.USEREVENT + </span><span class="s2">3</span>
+<span class="s1">pygame.time.set_timer(fly_animation_timer</span><span class="s0">, </span><span class="s2">200</span><span class="s1">)</span>
+
+<span class="s0">while True</span><span class="s1">:</span>
+    <span class="s0">for </span><span class="s1">event </span><span class="s0">in </span><span class="s1">pygame.event.get():</span>
+        <span class="s0">if </span><span class="s1">event.type == pygame.QUIT:</span>
+            <span class="s1">pygame.quit()</span>
+            <span class="s1">exit()</span>
+
+        <span class="s0">if </span><span class="s1">game_active:</span>
+            <span class="s0">if </span><span class="s1">event.type == pygame.MOUSEBUTTONDOWN:</span>
+                <span class="s0">if </span><span class="s1">player_rect.collidepoint(event.pos) </span><span class="s0">and </span><span class="s1">player_rect.bottom &gt;= </span><span class="s2">479</span><span class="s1">:</span>
+                    <span class="s1">player_gravity = -</span><span class="s2">21</span>
+
+        <span class="s0">if </span><span class="s1">game_active:</span>
+            <span class="s0">if </span><span class="s1">event.type == pygame.KEYDOWN:</span>
+                <span class="s0">if </span><span class="s1">event.key == pygame.K_SPACE </span><span class="s0">and </span><span class="s1">player_rect.bottom &gt;= </span><span class="s2">479</span><span class="s1">:</span>
+                    <span class="s1">player_gravity = -</span><span class="s2">21</span>
+        <span class="s0">else</span><span class="s1">:</span>
+            <span class="s0">if </span><span class="s1">event.type == pygame.KEYDOWN </span><span class="s0">and </span><span class="s1">event.key == pygame.K_SPACE:</span>
+                <span class="s1">game_active = </span><span class="s0">True</span>
+                <span class="s1">start_time = int(pygame.time.get_ticks() / </span><span class="s2">1000</span><span class="s1">)</span>
+
+        <span class="s0">if </span><span class="s1">game_active:</span>
+            <span class="s0">if </span><span class="s1">event.type == obstacle_timer </span><span class="s0">and </span><span class="s1">game_active:</span>
+                <span class="s0">if </span><span class="s1">randint(</span><span class="s2">0</span><span class="s0">, </span><span class="s2">2</span><span class="s1">):</span>
+                    <span class="s1">obstacle_rect_list.append(snail_surface.get_rect(bottomright=(randint(</span><span class="s2">900</span><span class="s0">, </span><span class="s2">1100</span><span class="s1">)</span><span class="s0">, </span><span class="s2">479</span><span class="s1">)))</span>
+                <span class="s0">else</span><span class="s1">:</span>
+                    <span class="s1">obstacle_rect_list.append(fly_surf.get_rect(bottomright=(randint(</span><span class="s2">900</span><span class="s0">, </span><span class="s2">1100</span><span class="s1">)</span><span class="s0">, </span><span class="s2">374</span><span class="s1">)))</span>
+
+            <span class="s0">if </span><span class="s1">event.type == snail_animation_timer:</span>
+                <span class="s0">if </span><span class="s1">snail_frame_index == </span><span class="s2">0</span><span class="s1">:</span>
+                    <span class="s1">snail_frame_index = </span><span class="s2">1</span>
+                <span class="s0">else</span><span class="s1">:</span>
+                    <span class="s1">snail_frame_index = </span><span class="s2">0</span>
+                <span class="s1">snail_surface = snail_frames[snail_frame_index]</span>
+
+            <span class="s0">if </span><span class="s1">event.type == fly_animation_timer:</span>
+                <span class="s0">if </span><span class="s1">fly_frame_index == </span><span class="s2">0</span><span class="s1">:</span>
+                    <span class="s1">fly_frame_index = </span><span class="s2">1</span>
+                <span class="s0">else</span><span class="s1">:</span>
+                    <span class="s1">fly_frame_index = </span><span class="s2">0</span>
+                <span class="s1">fly_surf = fly_frames[fly_frame_index]</span>
+
+    <span class="s0">if </span><span class="s1">game_active:</span>
+        <span class="s4"># positioning &amp; setting static images on screen</span>
+        <span class="s1">screen.blit(sky_scaled</span><span class="s0">, </span><span class="s1">(</span><span class="s2">0</span><span class="s0">, </span><span class="s2">0</span><span class="s1">))</span>
+        <span class="s1">screen.blit(ground_surface_scaled</span><span class="s0">, </span><span class="s1">(-</span><span class="s2">50</span><span class="s0">, </span><span class="s2">479</span><span class="s1">))</span>
+        <span class="s1">score = display_score()</span>
+
+        <span class="s4"># Player</span>
+        <span class="s1">player_gravity += </span><span class="s2">1</span>
+        <span class="s1">player_rect.y += player_gravity</span>
+        <span class="s0">if </span><span class="s1">player_rect.bottom &gt;= </span><span class="s2">479</span><span class="s1">: player_rect.bottom = </span><span class="s2">479</span>
+        <span class="s1">player_animation()</span>
+        <span class="s1">screen.blit(player_surf</span><span class="s0">, </span><span class="s1">player_rect)</span>
+
+        <span class="s4"># Obstacle movement</span>
+        <span class="s1">obstacle_rect_list = obstacle_movement(obstacle_rect_list)</span>
+
+        <span class="s4"># Collision</span>
+        <span class="s1">game_active = collisions(player_rect</span><span class="s0">, </span><span class="s1">obstacle_rect_list)</span>
+
+    <span class="s0">else</span><span class="s1">:</span>
+        <span class="s1">screen.fill((</span><span class="s2">63</span><span class="s0">, </span><span class="s2">109</span><span class="s0">, </span><span class="s2">162</span><span class="s1">))</span>
+        <span class="s1">screen.blit(player_stand_scaled</span><span class="s0">, </span><span class="s1">player_stand_rect)</span>
+        <span class="s1">obstacle_rect_list.clear()</span>
+        <span class="s1">player_rect.midbottom = (</span><span class="s2">120</span><span class="s0">, </span><span class="s2">480</span><span class="s1">)</span>
+        <span class="s1">player_gravity = </span><span class="s2">0</span>
+
+        <span class="s1">screen.blit(game_name</span><span class="s0">, </span><span class="s1">game_name_rect)</span>
+
+        <span class="s1">score_message = test_font.render(</span><span class="s3">f'Last Score: </span><span class="s0">{</span><span class="s1">score</span><span class="s0">}</span><span class="s3">'</span><span class="s0">, False, </span><span class="s1">(</span><span class="s2">255</span><span class="s0">, </span><span class="s2">255</span><span class="s0">, </span><span class="s2">255</span><span class="s1">))</span>
+        <span class="s1">score_message_rect = score_message.get_rect(center=(</span><span class="s2">450</span><span class="s0">, </span><span class="s2">450</span><span class="s1">))</span>
+
+        <span class="s0">if </span><span class="s1">score == </span><span class="s2">0</span><span class="s1">:</span>
+            <span class="s1">screen.blit(game_message</span><span class="s0">, </span><span class="s1">game_message_rect)</span>
+            <span class="s1">screen.blit(game_creators</span><span class="s0">, </span><span class="s1">game_creators_rect)</span>
+
+        <span class="s0">else</span><span class="s1">:</span>
+            <span class="s1">screen.blit(score_message</span><span class="s0">, </span><span class="s1">score_message_rect)</span>
+
+    <span class="s1">pygame.display.update()</span>
+    <span class="s1">clock.tick(</span><span class="s2">60</span><span class="s1">)</span>
+</pre>
+</body>
+</html>
