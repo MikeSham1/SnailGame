@@ -117,7 +117,7 @@ game_name_rect = game_name.get_rect(center=(450, 100))
 
 game_message = test_font.render('Press SPACE to continue', False, (255, 255, 255))
 game_message_rect = game_message.get_rect(center=(450, 450))
-game_creators = test_font.render('Code: Michael S. Art: Ethan A.', False, (255, 255, 255))
+game_creators = test_font.render('Code: Michael S.', False, (255, 255, 255))
 game_creators_rect = game_creators.get_rect(center=(450, 530))
 # Timer1
 # pygame
